@@ -1,53 +1,82 @@
 <!doctype html>
+<!--
+  PrivatFinanz – Datenschutzhinweise (endgültige Fassung für GitHub Pages, Stand 07.11.2026).
+  VOR VERÖFFENTLICHUNG AUSFÜLLEN: <Name>, <Kontakt-E-Mail>. Links zu Drittanbietern einmal aufrufen und prüfen.
+  Inhaltlich abgestimmt mit docs/SECURITY.md und ADR 0002: KEINE Ende-zu-Ende-/Zero-Knowledge-Aussage.
+  Keine Rechtsberatung.
+-->
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="index,follow">
-  <meta name="color-scheme" content="light">
-  <title>Datenschutzhinweise – PrivatFinanz</title>
-  <style>
-    :root { color-scheme: light; font-family: system-ui,-apple-system,"Segoe UI",sans-serif; color:#142034; background:#f4f7fb; }
-    * { box-sizing: border-box; }
-    body { margin:0; line-height:1.7; }
-    .wrap { max-width:770px; margin:56px auto; padding:0 20px 56px; }
-    header,main { background:white; border:1px solid #e0e8f0; }
-    header { padding:22px 32px; border-radius:16px 16px 0 0; border-bottom:0; }
-    main { padding:32px; border-radius:0 0 16px 16px; }
-    .logo { font-weight:800; letter-spacing:-.02em; color:#154d80; text-decoration:none; }
-    h1 { font-size:clamp(1.7rem,4vw,2.3rem); line-height:1.25; margin:0 0 20px; }
-    h2 { font-size:1.08rem; margin:25px 0 5px; }
-    p { margin:8px 0 14px; }
-    .note { background:#f0f6fc; border-left:3px solid #2a6699; padding:12px 16px; margin:20px 0; }
-    a { color:#165b9b; }
-    footer { padding-top:24px; color:#526579; font-size:.92rem; }
-    nav { display:flex; gap:18px; flex-wrap:wrap; }
-    @media(max-width:560px){.wrap{margin:20px auto}header,main{padding:22px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>PrivatFinanz – Datenschutzhinweise</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 46rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.55; color: #1b1b1b; }
+  h1 { font-size: 1.6rem; } h2 { font-size: 1.15rem; margin-top: 1.8rem; }
+  .hinweis { border-left: 4px solid #b3261e; padding: .6rem 1rem; background: #fdf3f2; }
+  table { border-collapse: collapse; width: 100%; } td, th { border: 1px solid #ccc; padding: .4rem .5rem; text-align: left; vertical-align: top; }
+  @media (prefers-color-scheme: dark) { body { background: #121212; color: #e6e6e6; } .hinweis { background: #2a1615; } td, th { border-color: #444; } a { color: #9ecbff; } }
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header><a class="logo" href="index.html">PrivatFinanz</a></header>
-    <main>
-      <h1>Datenschutzhinweise</h1>
-      <div class="note"><strong>Status:</strong> PrivatFinanz ist eine nicht öffentlich angebotene App für den persönlichen Eigengebrauch und befindet sich in Entwicklung. Die folgenden Angaben beschreiben die geplante Nutzung und werden vor dem produktiven Einsatz überprüft und bei Bedarf aktualisiert.</div>
-      <h2>1. Zweck der Anwendung</h2>
-      <p>PrivatFinanz dient der persönlichen Übersicht über eigene Bankkonten, Kontostände, Umsätze und daraus abgeleitete Finanzstatistiken. Die Anwendung wird nicht als Dienstleistung für Dritte angeboten.</p>
-      <h2>2. Bankverbindung über Enable Banking</h2>
-      <p>Für den Zugriff auf Bankkontoinformationen ist eine Anbindung an <a href="https://enablebanking.com/" rel="noopener noreferrer">Enable Banking</a> vorgesehen. Der Kontozugriff erfolgt nur nach einer entsprechenden Autorisierung durch den Kontoinhaber und im Umfang der erteilten Berechtigung. Es sollen ausschließlich eigene, ausdrücklich verknüpfte Konten abgerufen werden.</p>
-      <h2>3. Welche Daten verarbeitet werden sollen</h2>
-      <p>Vorgesehen sind Kontobezeichnungen und -kennungen, Kontostände, Buchungsdaten, Beträge, Buchungstexte sowie gegebenenfalls Empfänger- oder Absenderangaben. Diese Informationen dienen ausschließlich der privaten Finanzübersicht.</p>
-      <h2>4. Speicherung und Weitergabe</h2>
-      <p>Geplant ist eine lokale Speicherung der abgerufenen Finanzdaten auf dem eigenen Gerät. Es ist keine Veröffentlichung von Bankdaten oder Weitergabe an andere App-Nutzer vorgesehen. Die technische Umsetzung der Synchronisierung und der Schlüsselverwaltung wird noch festgelegt; sollte dafür eine zusätzliche Serverkomponente eingesetzt werden, wird dieser Hinweis entsprechend angepasst.</p>
-      <h2>5. Widerruf und Löschung</h2>
-      <p>Bankfreigaben können über die jeweiligen Bankverfahren beziehungsweise die <a href="https://enablebanking.com/data-sharing-consents/" rel="noopener noreferrer">Verwaltung der Enable-Banking-Freigaben</a> überprüft und beendet werden. Für die App ist eine Möglichkeit zum Entfernen lokal gespeicherter Finanzdaten vorgesehen.</p>
-      <h2>6. Diese Informationsseite</h2>
-      <p>Diese Seite wird über GitHub Pages bereitgestellt. Beim Aufruf kann GitHub technische Zugriffsdaten nach seinen eigenen Datenschutzbestimmungen verarbeiten. Diese Website verwendet selbst keine Tracking-Skripte, keine Analysewerkzeuge und keine Cookies, die durch den Seiteninhalt gesetzt werden. Sie empfängt und speichert keine Bankdaten.</p>
-      <h2>7. Kontakt</h2>
-      <p>Für Fragen zum Datenschutz kann die bei Enable Banking für PrivatFinanz hinterlegte Datenschutz-Kontaktadresse verwendet werden.</p>
-      <p><strong>Stand:</strong> 6. November 2026</p>
-    </main>
-    <footer><nav><a href="index.html">Startseite</a><a href="terms.html">Nutzungsbedingungen</a></nav></footer>
-  </div>
+<h1>Datenschutzhinweise für die private App „PrivatFinanz“</h1>
+<p><strong>Stand:</strong> 07.11.2026 · <strong>Verantwortlich:</strong> &lt;Name&gt;, &lt;Kontakt-E-Mail&gt;</p>
+
+<h2>1. Zweck und Nutzerkreis</h2>
+<p>PrivatFinanz ist eine private, nicht kommerzielle Android-App, die ausschließlich vom Verantwortlichen selbst auf einem eigenen Smartphone genutzt wird. Sie zeigt Kontostände und gebuchte Umsätze der <strong>eigenen</strong> Bankkonten an (derzeit bei der Sparda-Bank Südwest). Der Zugriff ist <strong>ausschließlich lesend</strong>: Es werden keine Zahlungen ausgelöst, keine Aufträge erteilt und keine Konten anderer Personen eingebunden. Die App wird nicht öffentlich angeboten.</p>
+
+<h2>2. Verarbeitete Daten</h2>
+<ul>
+  <li><strong>Kontoinformationen der eigenen Konten:</strong> Salden und gebuchte Umsätze (Betrag, Datum, Gegenpartei, Verwendungszweck). Vorgemerkte Umsätze werden nicht übernommen.</li>
+  <li><strong>Anmeldedaten:</strong> Anmeldung mit dem eigenen Google-Konto über Firebase Authentication; serverseitig wird nur die Firebase-Nutzerkennung (UID) geprüft.</li>
+  <li><strong>Geräte- und Sicherheitsdaten:</strong> Geräte-Kennung, öffentliche Geräteschlüssel (Verschlüsselung und Signatur), kurzlebige Prüfwerte gegen Wiederholungsangriffe, Zähler für Anfrage- und Abruflimits.</li>
+  <li><strong>Bankverbindung:</strong> Sitzungskennung der Bankzustimmung (Enable Banking), nur verschlüsselt gespeichert.</li>
+  <li><strong>Technische Verbindungsdaten:</strong> Bei einem vom Nutzer in der App ausgelösten Abruf werden IP-Adresse und Browser-/App-Kennung (User-Agent) des Smartphones an Enable Banking und die Bank weitergegeben, wie es die Schnittstelle für Abrufe in Anwesenheit des Kontoinhabers vorsieht.</li>
+</ul>
+
+<h2>3. Beteiligte Dienste und Datenfluss</h2>
+<ol>
+  <li><strong>Enable Banking Oy</strong> (Finnland, Kontoinformationsdienst) ruft im Auftrag des Nutzers die Kontodaten bei der Bank ab. Die Anmeldung bei der Bank (starke Kundenauthentifizierung) erfolgt direkt auf den Seiten der Bank bzw. von Enable Banking; Zugangsdaten zur Bank erhält PrivatFinanz nicht.</li>
+  <li><strong>Cloudflare, Inc.</strong> betreibt das Backend (Cloudflare Workers und die Datenbank D1). Die Datenbank ist auf die <strong>EU</strong> beschränkt (Jurisdiktion „eu“). Der Worker selbst läuft im weltweiten Cloudflare-Netz am Standort nahe der jeweiligen Anfrage. Automatische Anfrage-Protokolle („Observability“) sind abgeschaltet; es werden keine Inhalte von Anfragen protokolliert.</li>
+  <li><strong>Google (Firebase Authentication)</strong> für die Anmeldung mit dem Google-Konto. Push-Benachrichtigungen werden derzeit nicht verwendet.</li>
+  <li><strong>Smartphone:</strong> Die Daten werden auf dem Gerät mit einem Schlüssel entschlüsselt, der im Android-Schlüsselspeicher erzeugt wurde und das Gerät nicht verlassen kann, und in einer verschlüsselten lokalen Datenbank (SQLCipher) gespeichert.</li>
+</ol>
+<p class="hinweis"><strong>Wichtig:</strong> Das ist <strong>keine Ende-zu-Ende-Verschlüsselung von der Bank bis zum Smartphone</strong> und kein „Zero-Knowledge“-Verfahren. Enable Banking und der Cloudflare Worker verarbeiten die Kontodaten beim Abruf im <strong>Klartext</strong>: Der Worker prüft die Buchungen, erkennt Duplikate und verschlüsselt neue Buchungen erst danach für das freigegebene Smartphone. Diese Klartextverarbeitung im Worker ist kurzzeitig (nur während des jeweiligen Abrufs im Arbeitsspeicher); dauerhaft im Klartext gespeichert wird dort nichts. Die Verschlüsselung schützt die in der Datenbank zwischengespeicherten Daten.</p>
+
+<h2>4. Speicherdauer</h2>
+<table>
+  <tr><th>Daten</th><th>Ort</th><th>Dauer</th></tr>
+  <tr><td>Verschlüsselte Postfach-Einträge (neue Buchungen, Salden)</td><td>Cloudflare D1 (EU)</td><td>bis zur Bestätigung durch das Smartphone (dann sofort gelöscht); unbestätigte Einträge sind nach 7 Tagen abgelaufen und nicht mehr abrufbar und werden beim nächsten Zugriff gelöscht (siehe Hinweis unten)</td></tr>
+  <tr><td>Pseudonyme Prüfwerte zur Duplikaterkennung (HMAC, kein Klartext)</td><td>Cloudflare D1 (EU)</td><td>400 Tage ab erster Erfassung, danach Löschung beim nächsten Zugriff</td></tr>
+  <tr><td>Bankverbindung (verschlüsselte Sitzungskennung)</td><td>Cloudflare D1 (EU)</td><td>bis zum Ablauf der Bankzustimmung (höchstens 90 Tage bzw. die von der Bank erlaubte kürzere Dauer) oder bis zum Widerruf</td></tr>
+  <tr><td>Autorisierungs-Zwischenwerte, Prüfwerte gegen Wiederholung, Limit-Zähler</td><td>Cloudflare D1 (EU)</td><td>laufen nach Minuten bis 7 Tagen ab; Löschung beim nächsten Zugriff</td></tr>
+  <tr><td>Geräte-Kennung und öffentliche Geräteschlüssel</td><td>Cloudflare D1 (EU)</td><td>solange das Gerät genutzt wird; gesperrte oder ersetzte Geräte bleiben als Sperrvermerk (nur öffentliche Schlüssel, keine Kontodaten) erhalten</td></tr>
+  <tr><td>Signiertes Zugangs-Token zur Enable-Banking-Schnittstelle (verschlüsselt)</td><td>Cloudflare D1 (EU)</td><td>höchstens 6 Stunden gültig; danach Löschung beim nächsten Zugriff</td></tr>
+  <tr><td>Kontodaten auf dem Smartphone</td><td>verschlüsselte lokale Datenbank</td><td>bis zur Löschung der App-Daten durch den Nutzer</td></tr>
+</table>
+<p><strong>Hinweis zur Löschung:</strong> Es gibt keinen zeitgesteuerten Löschlauf. Abgelaufene Daten werden beim Lesen sofort ignoriert und bei der nächsten Verbindung der App mit dem Server (höchstens einmal pro Stunde) oder durch eine manuelle Bereinigung durch den Verantwortlichen endgültig gelöscht. Wird die App längere Zeit nicht genutzt, verbleiben abgelaufene, verschlüsselte Einträge bis dahin in der Datenbank.</p>
+
+<h2>5. Sicherheit</h2>
+<ul>
+  <li>Zugriff nur mit dem eigenen Google-Konto <strong>und</strong> dem manuell freigegebenen Smartphone (gerätegebundener Schlüsselnachweis bei jeder Anfrage).</li>
+  <li>Nur verschlüsselte Übertragung (HTTPS); unverschlüsselte Anfragen werden abgelehnt.</li>
+  <li>Verschlüsselung der zwischengespeicherten Daten und der Bank-Sitzung; Schlüssel nur als geschützte Konfiguration des Backends.</li>
+  <li>Keine Weitergabe an weitere Dritte, keine Werbung, keine Analyse- oder Tracking-Dienste.</li>
+  <li>Bankabrufe nur nach ausdrücklicher Aktion des Nutzers in der App; keine automatischen Hintergrundabrufe.</li>
+</ul>
+
+<h2>6. Rechtsgrundlage</h2>
+<p>Verarbeitet werden ausschließlich eigene Daten des Verantwortlichen für persönliche Zwecke. Daten Dritter fallen nur insoweit an, als sie in den eigenen Umsätzen enthalten sind (z. B. Name einer Gegenpartei im Verwendungszweck); sie werden ausschließlich zur Anzeige der eigenen Kontobewegungen verarbeitet und nicht weitergegeben.</p>
+
+<h2>7. Widerruf und Löschung</h2>
+<p>Die Bankzustimmung kann jederzeit bei der Bank oder über Enable Banking widerrufen werden; sie endet außerdem automatisch mit Ablauf. Das Smartphone kann serverseitig gesperrt werden. Unbestätigte Postfach-Einträge sind nach 7 Tagen nicht mehr abrufbar und werden beim nächsten Zugriff oder manuell gelöscht. Fragen: &lt;Kontakt-E-Mail&gt;.</p>
+
+<h2>8. Informationen der beteiligten Dienste</h2>
+<ul>
+  <li>Enable Banking: <a href="https://enablebanking.com/terms/">enablebanking.com/terms</a></li>
+  <li>Cloudflare: <a href="https://www.cloudflare.com/privacypolicy/">cloudflare.com/privacypolicy</a></li>
+  <li>Google / Firebase: <a href="https://firebase.google.com/support/privacy">firebase.google.com/support/privacy</a></li>
+</ul>
 </body>
 </html>
