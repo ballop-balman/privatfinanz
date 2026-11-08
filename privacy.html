@@ -1,9 +1,8 @@
 <!doctype html>
 <!--
-  PrivatFinanz – Datenschutzhinweise (endgültige Fassung für GitHub Pages, Stand 07.11.2026).
-  VOR VERÖFFENTLICHUNG AUSFÜLLEN: <Name>, <Kontakt-E-Mail>. Links zu Drittanbietern einmal aufrufen und prüfen.
-  Inhaltlich abgestimmt mit docs/SECURITY.md und ADR 0002: KEINE Ende-zu-Ende-/Zero-Knowledge-Aussage.
-  Keine Rechtsberatung.
+  PrivatFinanz – Datenschutzhinweise (GitHub Pages), Stand 08.11.2026: Relay-Verfahren (Verarbeitung der Bankantwort
+  auf dem Smartphone). Inhaltlich abgestimmt mit docs/SECURITY.md, ADR 0002 und ADR 0008: KEINE Ende-zu-Ende-/
+  Zero-Knowledge-Aussage. Keine Rechtsberatung.
 -->
 <html lang="de">
 <head>
@@ -21,7 +20,7 @@
 </head>
 <body>
 <h1>Datenschutzhinweise für die private App „PrivatFinanz“</h1>
-<p><strong>Stand:</strong> 07.11.2026 · <strong>Verantwortlich:</strong> Lukas Kleinz, kleinz.lukas@gmail.com</p>
+<p><strong>Stand:</strong> 08.11.2026 (neu: Verarbeitung der Bankantwort auf dem Smartphone) · <strong>Verantwortlich:</strong> Lukas Kleinz, kleinz.lukas@gmail.com</p>
 
 <h2>1. Zweck und Nutzerkreis</h2>
 <p>PrivatFinanz ist eine private, nicht kommerzielle Android-App, die ausschließlich vom Verantwortlichen selbst auf einem eigenen Smartphone genutzt wird. Sie zeigt Kontostände und gebuchte Umsätze der <strong>eigenen</strong> Bankkonten an (derzeit bei der Sparda-Bank Südwest). Der Zugriff ist <strong>ausschließlich lesend</strong>: Es werden keine Zahlungen ausgelöst, keine Aufträge erteilt und keine Konten anderer Personen eingebunden. Die App wird nicht öffentlich angeboten.</p>
@@ -40,22 +39,24 @@
   <li><strong>Enable Banking Oy</strong> (Finnland, Kontoinformationsdienst) ruft im Auftrag des Nutzers die Kontodaten bei der Bank ab. Die Anmeldung bei der Bank (starke Kundenauthentifizierung) erfolgt direkt auf den Seiten der Bank bzw. von Enable Banking; Zugangsdaten zur Bank erhält PrivatFinanz nicht.</li>
   <li><strong>Cloudflare, Inc.</strong> betreibt das Backend (Cloudflare Workers und die Datenbank D1). Die Datenbank ist auf die <strong>EU</strong> beschränkt (Jurisdiktion „eu“). Der Worker selbst läuft im weltweiten Cloudflare-Netz am Standort nahe der jeweiligen Anfrage. Automatische Anfrage-Protokolle („Observability“) sind abgeschaltet; es werden keine Inhalte von Anfragen protokolliert.</li>
   <li><strong>Google (Firebase Authentication)</strong> für die Anmeldung mit dem Google-Konto. Push-Benachrichtigungen werden derzeit nicht verwendet.</li>
-  <li><strong>Smartphone:</strong> Die Daten werden auf dem Gerät mit einem Schlüssel entschlüsselt, der im Android-Schlüsselspeicher erzeugt wurde und das Gerät nicht verlassen kann, und in einer verschlüsselten lokalen Datenbank (SQLCipher) gespeichert.</li>
+  <li><strong>Smartphone:</strong> Die Daten werden auf dem Gerät mit einem Schlüssel entschlüsselt, der im Android-Schlüsselspeicher erzeugt wurde und das Gerät nicht verlassen kann. Das Smartphone wertet die Antwort der Bank selbst aus: Es übernimmt nur die Buchungsangaben, die die App anzeigt (Datum, Betrag, Währung, Gegenpartei, Verwendungszweck), erkennt doppelte Buchungen und speichert alles in einer verschlüsselten lokalen Datenbank (SQLCipher). Die übrigen Angaben der Bankantwort liegen dort nur bis zur Verarbeitung und werden danach gelöscht.</li>
 </ol>
-<p class="hinweis"><strong>Wichtig:</strong> Das ist <strong>keine Ende-zu-Ende-Verschlüsselung von der Bank bis zum Smartphone</strong> und kein „Zero-Knowledge“-Verfahren. Enable Banking und der Cloudflare Worker verarbeiten die Kontodaten beim Abruf im <strong>Klartext</strong>: Der Worker prüft die Buchungen, erkennt Duplikate und verschlüsselt neue Buchungen erst danach für das freigegebene Smartphone. Diese Klartextverarbeitung im Worker ist kurzzeitig (nur während des jeweiligen Abrufs im Arbeitsspeicher); dauerhaft im Klartext gespeichert wird dort nichts. Die Verschlüsselung schützt die in der Datenbank zwischengespeicherten Daten.</p>
+<p class="hinweis"><strong>Wichtig:</strong> Das ist <strong>keine Ende-zu-Ende-Verschlüsselung von der Bank bis zum Smartphone</strong> und kein „Zero-Knowledge“-Verfahren. Enable Banking und der Cloudflare Worker haben die Kontodaten beim Abruf im <strong>Klartext</strong>: Der Worker empfängt die Antwort der Bank und verschlüsselt sie unmittelbar danach für das freigegebene Smartphone. Diese Klartextverarbeitung im Worker ist kurzzeitig (nur während des Abrufs im Arbeitsspeicher); dauerhaft im Klartext gespeichert wird dort nichts. In der Datenbank des Servers liegt die Bankantwort nur verschlüsselt, und zwar so, dass ausschließlich das Smartphone sie entschlüsseln kann – auch der Server selbst nicht. Die Verschlüsselung schützt die gespeicherten Daten; sie ändert nichts daran, dass der Worker die Daten beim Abruf kurz im Klartext sieht.</p>
 
 <h2>4. Speicherdauer</h2>
 <table>
   <tr><th>Daten</th><th>Ort</th><th>Dauer</th></tr>
-  <tr><td>Verschlüsselte Postfach-Einträge (neue Buchungen, Salden)</td><td>Cloudflare D1 (EU)</td><td>bis zur Bestätigung durch das Smartphone (dann sofort gelöscht); unbestätigte Einträge sind nach 7 Tagen abgelaufen und nicht mehr abrufbar und werden beim nächsten Zugriff gelöscht (siehe Hinweis unten)</td></tr>
-  <tr><td>Pseudonyme Prüfwerte zur Duplikaterkennung (HMAC, kein Klartext)</td><td>Cloudflare D1 (EU)</td><td>400 Tage ab erster Erfassung, danach Löschung beim nächsten Zugriff</td></tr>
+  <tr><td>Postfach: Antwort der Bank zu Salden und gebuchten Umsätzen, <strong>vollständig</strong> mit allen von der Bank gelieferten Angaben (z. B. auch Kontokennungen von Gegenparteien), nur für das Smartphone verschlüsselt</td><td>Cloudflare D1 (EU)</td><td>bis zur Bestätigung durch das Smartphone, dann sofort gelöscht. Unbestätigte Einträge sind nach 7 Tagen abgelaufen und nicht mehr abrufbar; gelöscht werden sie erst beim nächsten Zugriff bzw. bei der nächsten Bereinigung (siehe Hinweis unten) – eine Löschung genau nach 7 Tagen findet <strong>nicht</strong> statt.</td></tr>
+  <tr><td>Nur beim bisherigen Abrufverfahren (Rückfallebene): Zwischenablage abgerufener Kontodaten, verschlüsselt mit dem Serverschlüssel</td><td>Cloudflare D1 (EU)</td><td>bis zur Verarbeitung (in der Regel Sekunden), danach sofort gelöscht; nicht verarbeitete Pakete sind nach 1 Stunde abgelaufen, werden nicht mehr verwendet und beim nächsten Zugriff gelöscht</td></tr>
+  <tr><td>Nur beim bisherigen Abrufverfahren: pseudonyme Prüfwerte zur Duplikaterkennung (HMAC, kein Klartext)</td><td>Cloudflare D1 (EU)</td><td>400 Tage ab erster Erfassung, danach Löschung beim nächsten Zugriff</td></tr>
   <tr><td>Bankverbindung (verschlüsselte Sitzungskennung)</td><td>Cloudflare D1 (EU)</td><td>bis zum Ablauf der Bankzustimmung (höchstens 90 Tage bzw. die von der Bank erlaubte kürzere Dauer) oder bis zum Widerruf</td></tr>
   <tr><td>Autorisierungs-Zwischenwerte, Prüfwerte gegen Wiederholung, Limit-Zähler</td><td>Cloudflare D1 (EU)</td><td>laufen nach Minuten bis 7 Tagen ab; Löschung beim nächsten Zugriff</td></tr>
   <tr><td>Geräte-Kennung und öffentliche Geräteschlüssel</td><td>Cloudflare D1 (EU)</td><td>solange das Gerät genutzt wird; gesperrte oder ersetzte Geräte bleiben als Sperrvermerk (nur öffentliche Schlüssel, keine Kontodaten) erhalten</td></tr>
   <tr><td>Signiertes Zugangs-Token zur Enable-Banking-Schnittstelle (verschlüsselt)</td><td>Cloudflare D1 (EU)</td><td>höchstens 6 Stunden gültig; danach Löschung beim nächsten Zugriff</td></tr>
-  <tr><td>Kontodaten auf dem Smartphone</td><td>verschlüsselte lokale Datenbank</td><td>bis zur Löschung der App-Daten durch den Nutzer</td></tr>
+  <tr><td>Kontodaten auf dem Smartphone (Buchungen, Salden)</td><td>verschlüsselte lokale Datenbank</td><td>bis zur Löschung der App-Daten durch den Nutzer</td></tr>
+  <tr><td>Unverarbeitete Teile einer Bankantwort auf dem Smartphone</td><td>verschlüsselte lokale Datenbank</td><td>bis zur Verarbeitung; unvollständige Teile spätestens nach 8 Tagen beim nächsten Abholen gelöscht</td></tr>
 </table>
-<p><strong>Hinweis zur Löschung:</strong> Es gibt keinen zeitgesteuerten Löschlauf. Abgelaufene Daten werden beim Lesen sofort ignoriert und bei der nächsten Verbindung der App mit dem Server (höchstens einmal pro Stunde) oder durch eine manuelle Bereinigung durch den Verantwortlichen endgültig gelöscht. Wird die App längere Zeit nicht genutzt, verbleiben abgelaufene, verschlüsselte Einträge bis dahin in der Datenbank.</p>
+<p><strong>Hinweis zur Löschung:</strong> Es gibt keinen zeitgesteuerten Löschlauf. Abgelaufene Daten werden beim Lesen sofort ignoriert und bei der nächsten Verbindung der App mit dem Server (höchstens einmal pro Stunde) oder durch eine manuelle Bereinigung durch den Verantwortlichen endgültig gelöscht. Wird die App längere Zeit nicht genutzt, verbleiben abgelaufene, verschlüsselte Einträge bis dahin in der Datenbank. Eine physische Löschung zu einem festen Zeitpunkt wird daher nicht zugesagt.</p>
 
 <h2>5. Sicherheit</h2>
 <ul>
